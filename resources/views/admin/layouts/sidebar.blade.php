@@ -47,6 +47,15 @@
                         class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
 
             </li>
+
+            <li
+                class=" nav-item {{ \Str::is('admin.levels.*', request()->route()->getName()) ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('admin.levels.index') }}"><i
+                        data-feather="user"></i><span class="menu-title text-truncate"
+                        data-i18n="Dashboards">Lavel</span><span
+                        class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
+
+            </li>
             
 
 

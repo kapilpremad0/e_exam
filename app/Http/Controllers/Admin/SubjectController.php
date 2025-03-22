@@ -98,4 +98,14 @@ class SubjectController extends Controller
         Subject::where('id', $id)->delete();
         return redirect()->back()->with('success', 'Subject Delete Successfully');
     }
+
+
+    public function getSubjects(Request $request)
+    {
+        $subjects = Subject::where('exam_id', $request->exam_id)->get();
+
+        return response()->json(['subjects' => $subjects]);
+    }
+
+    
 }

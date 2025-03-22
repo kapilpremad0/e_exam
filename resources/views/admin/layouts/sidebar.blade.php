@@ -34,7 +34,16 @@
                 class=" nav-item {{ \Str::is('admin.exams.*', request()->route()->getName()) ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ route('admin.exams.index') }}"><i
                         data-feather="user"></i><span class="menu-title text-truncate"
-                        data-i18n="Dashboards">Manage exams</span><span
+                        data-i18n="Dashboards">Exams</span><span
+                        class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
+
+            </li>
+
+            <li
+                class=" nav-item {{ \Str::is('admin.subjects.*', request()->route()->getName()) ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('admin.subjects.index') }}"><i
+                        data-feather="user"></i><span class="menu-title text-truncate"
+                        data-i18n="Dashboards">Subject</span><span
                         class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
 
             </li>

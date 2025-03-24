@@ -23,6 +23,7 @@ Route::post('reset_password',[AuthController::class,'reset_password'])->middlewa
 
 Route::get('home',[HomeComtroller::class,'home'])->middleware('auth:api');
 Route::get('subject_detail/{id}',[HomeComtroller::class,'subjectDetail'])->middleware('auth:api');
+Route::get('level_detail/{id}',[HomeComtroller::class,'levelDetail'])->middleware('auth:api');
 
 
 Route::get('cities',[AuthController::class,'getCities']);

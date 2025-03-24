@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LavelController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\SubjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('exams',ExamController::class);
         Route::resource('subjects',SubjectController::class);
         Route::resource('levels',LavelController::class);
+        Route::resource('questions',QuestionController::class);
+
+        
         
             
     });

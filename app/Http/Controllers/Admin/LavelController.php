@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreLevelRequest;
 use App\Http\Requests\Admin\UpdateLevelRequest;
 use App\Models\Exam;
 use App\Models\Level;
+use App\Models\Question;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -64,8 +65,8 @@ class LavelController extends Controller
 
     function show($id){
         $level = Level::find($id);
-        $questions = [];
-        return view('admin.levels.show',);
+        $questions = Question::where('level_id',$id)->latest()->get();
+        return view('admin.levels.show',compact('level','questions'));
     }
 
     function edit($id)

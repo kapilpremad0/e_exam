@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\SubmitResultRequest;
 use App\Models\Exam;
 use App\Models\Level;
 use App\Models\Question;
 use App\Models\Subject;
+use App\Models\SubmitResult;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeComtroller extends Controller
 {
@@ -39,6 +42,30 @@ class HomeComtroller extends Controller
             'level' => $level,
             'questions' => $questions,
         ]);
+    }
+
+    function submitResult(SubmitResultRequest $request){
+        $level = Level::find($request->level_id);
+        $questions = $request->questions;
+        $correct_question = 0;
+        foreach($questions as $question){
+            $ques = Question::find($question['question_id']);
+            if($ques->correct_answer == $question['answer']){
+                $correct_question ++;
+            }
+        }
+        $submit_result = SubmitResult::updateOrCreate(['user_id' => Auth::id() , 'level_id' => $request->level_id],[
+            'total_question' => $level->quaction,
+            'correct_anster' => $correct_question,
+        ]);
+        $submit_result['message'] = 'Submit Result Successfully';
+        return response()->json($submit_result);
+    }
+
+
+    function results(){
+        $results = SubmitResult::where('user_id',Auth::id())->with('laval')->latest()->get();
+        return response()->json($results);
     }
 
 

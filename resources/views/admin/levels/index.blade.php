@@ -93,7 +93,7 @@
                                                             </div> --}}
                                                             <div>
                                                                 <div class="fw-bolder"><a
-                                                                        href="{{ route('admin.levels.edit', $item->id) }}">{{ $item->name ?? '' }}</a>
+                                                                        href="{{ route('admin.levels.show', $item->id) }}">{{ $item->name ?? '' }}</a>
                                                                 </div>
                                                             </div>
                                                         </div>

@@ -25,6 +25,12 @@ class Exam extends Model
         return $query->where('status',1);
     }
 
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, 'exam_id', 'id');
+    }
+
     
 
 }

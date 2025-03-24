@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HomeComtroller;
 use App\Http\Controllers\Api\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,13 @@ Route::post('register',[AuthController::class,'register']);
 Route::post('login',[AuthController::class,'login']);
 Route::post('forgot_password',[AuthController::class,'forgot_password']);
 Route::post('verify_otp',[AuthController::class,'verify_otp']);
+
+
 Route::post('reset_password',[AuthController::class,'reset_password'])->middleware('auth:api');
+
+
+Route::get('home',[HomeComtroller::class,'home'])->middleware('auth:api');
+Route::get('subject_detail/{id}',[HomeComtroller::class,'subjectDetail'])->middleware('auth:api');
 
 
 Route::get('cities',[AuthController::class,'getCities']);

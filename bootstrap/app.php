@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -23,6 +24,13 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $exception, Request $request) {
             if ($request->is('api/*')) {
+
+                if ($exception instanceof AuthenticationException) {
+                    return response()->json([
+                        'message' => 'Unauthenticated. Please log in to access this route.',
+                    ], 401); // 401 Unauthorized
+                }
+
                 
                 if ($exception instanceof NotFoundHttpException) {
                     return response()->json(['message' => 'API not found.'], 404);

@@ -61,6 +61,13 @@ class LavelController extends Controller
         session()->flash('success', 'Subject Create Successfully');
     }
 
+
+    function show($id){
+        $level = Level::find($id);
+        $questions = [];
+        return view('admin.levels.show',);
+    }
+
     function edit($id)
     {
         $level = Level::find($id);

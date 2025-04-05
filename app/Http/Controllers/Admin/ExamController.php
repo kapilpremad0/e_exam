@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreExamRequest;
 use App\Http\Requests\Admin\UpdateExamRequest;
 use App\Models\Exam;
+use App\Models\Level;
+use App\Models\Question;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class ExamController extends Controller
@@ -103,4 +106,30 @@ class ExamController extends Controller
         Exam::where('id', $id)->delete();
         return redirect()->back()->with('success', 'Exam Delete Successfully');
     }
+
+
+    function show($id)
+    {
+        $exam = Exam::find($id);
+        $subjects = $exam->subjects()->get();
+        return view('admin.exams.show', compact('exam','subjects'));
+    }
+
+    function subjects($id)
+    {
+        $subject = Subject::with('exam')->find($id);
+        $levels = Level::where(['exam_id' => $subject->exam_id , 'subject_id' => $subject->id])->latest()->get();
+        return view('admin.exams.subjects', compact('subject','levels'));
+    }
+
+
+    function levels($id)
+    {
+        $level = Level::with('exam','subject')->find($id);
+        // return $level;
+        $questions = Question::where('level_id',$id)->get();
+        return view('admin.exams.levels', compact('level','questions'));
+    }
+
+
 }

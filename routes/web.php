@@ -30,6 +30,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::get('/', [HomeController::class,'index'])->name('dashboard');
         Route::resource('exams',ExamController::class);
+        Route::get('exams/subjects-view/{id}',[ExamController::class,'subjects'])->name('exams.subjects');
+        Route::get('exams/levels-view/{id}',[ExamController::class,'levels'])->name('exams.levels');
+
         Route::resource('subjects',SubjectController::class);
         Route::resource('levels',LavelController::class);
         Route::resource('questions',QuestionController::class);

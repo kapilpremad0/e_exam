@@ -22,6 +22,13 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
+        $this->call([
+            StateSeeder::class,
+            CitySeeder::class,
+            // UserRolePermissionSeeder::class,
+            // Add all your seeders here
+        ]);
+
         User::updateOrCreate(['email' => 'admin@gmail.com'],[
             'name' => 'Admin',
             'role' => 1,

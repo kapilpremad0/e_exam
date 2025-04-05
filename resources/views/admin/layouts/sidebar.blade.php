@@ -56,6 +56,33 @@
                         class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
 
             </li>
+
+            <li
+                class=" nav-item {{ \Str::is('admin.submit_results.*', request()->route()->getName()) ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('admin.submit_results.index') }}"><i
+                        data-feather="user"></i><span class="menu-title text-truncate"
+                        data-i18n="Dashboards">Submit Results</span><span
+                        class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
+
+            </li>
+
+            <li
+                class=" nav-item {{ \Str::is('admin.levels.*', request()->route()->getName()) ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('admin.levels.index') }}"><i
+                        data-feather="user"></i><span class="menu-title text-truncate"
+                        data-i18n="Dashboards">Transaction</span><span
+                        class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
+
+            </li>
+
+            <li
+                class=" nav-item {{ \Str::is('admin.levels.*', request()->route()->getName()) ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('admin.levels.index') }}"><i
+                        data-feather="user"></i><span class="menu-title text-truncate"
+                        data-i18n="Dashboards">Users</span><span
+                        class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
+
+            </li>
             
 
 

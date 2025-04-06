@@ -8,7 +8,9 @@ use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Requests\Api\ResetPasswordRequest;
 use App\Http\Requests\Api\VerifyOtpRequest;
+use App\Models\City;
 use App\Models\OtpVerify;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Http\Request;
@@ -20,7 +22,14 @@ class AuthController extends Controller
     function register(RegisterRequest $request){
         $data = $request->validated();
         $data['password'] = Hash::make($request->password);
-        $user = User::updateOrCreate($data);
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = time() . '_' . $image->getClientOriginalName(); // Unique filename
+
+            $image->move(public_path('storage'), $filename); // Move the file to a public directory
+            $data['image'] = $filename;
+        }
+        $user = User::updateOrCreate(['email' => $request->email],$data);
         return response()->json($user);
     }
 
@@ -80,9 +89,10 @@ class AuthController extends Controller
 
 
     function reset_password(ResetPasswordRequest $request){
-        // return Hash::make($request->pssword);
         $data['password'] = Hash::make($request->pssword);
-        $user = User::where('id',Auth::user()->id)->update($data);
+        $user = User::where('id',Auth::user()->id)->update([
+            'password' => Hash::make($request->pssword)
+        ]);
         $user = User::find(Auth::id());
         $user['message'] = 'Password Change Successfully';
         $user['new_password'] = $request->password;
@@ -92,48 +102,16 @@ class AuthController extends Controller
 
     public function getCities(Request $request)
     {
-        // try {
-            $state_id = $request->state_id;
-            $states = config('cities');
-            $collect = collect($states)->map(function ($item) use ($state_id) {
-                if ($state_id == $item['state_id']) {
-                    return [
-                        'id' => $item['id'],
-                        'name' => $item['name']
-                    ];
-                }
-            })->filter()
-                ->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE)
-                ->values();
-
-            return response()->json($collect);
-            // return $this->sendSuccess('CITIES FETCH SUCCESSFULLY', $collect);
-        // } catch (\Throwable $e) {
-        //     return $this->sendFailed($e->getMessage() . ' On Line ' . $e->getLine(), 200);
-        // }
+        $cities = City::when($request->state_id,function($query) use ($request){
+            $query->where('state_id',$request->state_id);
+        })->orderBy('name','ASC')->get();
+        return response()->json($cities);
     }
 
 
     public function getStates()
     {
-        // try {
-            // $states = DB::table('states')->select('id','name','iso2 as code')->orderBy('name','ASC')->get();
-
-            $states = config('states');
-
-            $collect = collect($states);
-            $filteredCollection = $collect->map(function ($item) {
-                return [
-                    'id' => $item['id'],
-                    'name' => $item['name'],
-                    'code' => $item['iso2']
-                ];
-            });
-            return response()->json($filteredCollection);
-
-            // return $this->sendSuccess('STATES FETCH SUCCESSFULLY', $filteredCollection);
-        // } catch (\Throwable $e) {
-        //     return $this->sendFailed($e->getMessage() . ' On Line ' . $e->getLine(), 200);
-        // }
+        $states = State::orderBy('name','ASC')->get();
+        return response()->json($states);
     }
 }

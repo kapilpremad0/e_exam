@@ -70,15 +70,16 @@ class HomeComtroller extends Controller
         }
         $submit_result = SubmitResult::updateOrCreate(['user_id' => Auth::id() , 'level_id' => $request->level_id],[
             'total_question' => $level->quaction,
-            'correct_anster' => $correct_question,
+            'correct_answer' => $correct_question,
         ]);
+
         $submit_result['message'] = 'Submit Result Successfully';
         return response()->json($submit_result);
     }
 
 
     function results(){
-        $results = SubmitResult::where('user_id',Auth::id())->with('laval')->latest()->get();
+        $results = SubmitResult::where('user_id',Auth::id())->with('level')->latest()->get();
         return response()->json($results);
     }
 

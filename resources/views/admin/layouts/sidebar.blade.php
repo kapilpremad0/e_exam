@@ -39,7 +39,7 @@
 
             </li>
 
-            <li
+            {{-- <li
                 class=" nav-item {{ \Str::is('admin.subjects.*', request()->route()->getName()) ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ route('admin.subjects.index') }}"><i
                         data-feather="user"></i><span class="menu-title text-truncate"
@@ -55,7 +55,7 @@
                         data-i18n="Dashboards">Lavel</span><span
                         class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
 
-            </li>
+            </li> --}}
 
             <li
                 class=" nav-item {{ \Str::is('admin.submit_results.*', request()->route()->getName()) ? 'active' : '' }}">

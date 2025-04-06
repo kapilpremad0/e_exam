@@ -22,7 +22,11 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string'
+            'name' => 'nullable|string',
+            'address' => 'nullable|string',
+            'city_id' => 'nullable|exists:cities,id',
+            'state_id' => 'nullable|exists:states,id',
+            'image' => 'nullable|image',
         ];
     }
 }

@@ -89,7 +89,15 @@ class LavelController extends Controller
 
     function destroy($id)
     {
+        $level = Level::find($id);
+        $subject_id = $level->subject_id;
         Level::where('id', $id)->delete();
+        $i = 1;
+        $levels = Level::where('subject_id', $subject_id)->orderBy('name','ASC')->get();
+        foreach ($levels as $level) {
+            Level::where('id', $level->id)->update(['name' => $i]);
+            $i ++;
+        }
         return redirect()->back()->with('success', 'Subject Delete Successfully');
     }
 }

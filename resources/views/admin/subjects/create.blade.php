@@ -37,7 +37,7 @@
                                     </li>
                                     <li class="breadcrumb-item"><a href="{{ route('admin.subjects.index') }}">Subjects</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Create
+                                    <li class="breadcrumb-item active">Update
                                     </li>
                                 </ol>
                             </div>
@@ -136,7 +136,7 @@
 
                                         
 
-                                        <div class="col-md-12 col-12">
+                                        {{-- <div class="col-md-12 col-12">
                                             <div class="mb-1">
                                                 <div class="d-flex flex-column">
                                                     <label class="form-check-label mb-50"
@@ -156,7 +156,7 @@
                                                         id="description-submit_errors"></span>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
 
 
@@ -190,11 +190,11 @@
             $('#submitFrom').on('submit', function(e) {
                 e.preventDefault(); // Prevent the default form submission
 
-                let headingElements = 
-                document.getElementsByClassName('ql-editor');
-                let headingVal = headingElements[0].innerHTML;
+                // let headingElements = 
+                // document.getElementsByClassName('ql-editor');
+                // let headingVal = headingElements[0].innerHTML;
                 
-                $('#description_id').val(headingVal);
+                // $('#description_id').val(headingVal);
 
 
                 var $form = $('#submitFrom');

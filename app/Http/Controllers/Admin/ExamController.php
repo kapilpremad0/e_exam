@@ -18,6 +18,7 @@ class ExamController extends Controller
         $query_search = $request->input('search');
         $change_status = $request->input('change_status');
         $change_trending = $request->input('change_trending');
+
         if ($change_trending) {
             $category_change = Exam::find($change_trending);
             if ($category_change->trending == 1) {
@@ -108,15 +109,39 @@ class ExamController extends Controller
     }
 
 
-    function show($id)
+    function show($id ,Request $request)
     {
+        $change_status = $request->input('change_status');
+    
+        if ($change_status) {
+            $category_change = Subject::find($change_status);
+            if ($category_change->status == 1) {
+                $category_change->update(['status' => 0]);
+                return 'Status change successful';
+            } else {
+                $category_change->update(['status' => 1]);
+                return 'Status change successful';
+            }
+        }
         $exam = Exam::find($id);
         $subjects = $exam->subjects()->get();
         return view('admin.exams.show', compact('exam','subjects'));
     }
 
-    function subjects($id)
+    function subjects($id ,Request $request)
     {
+        $change_status = $request->input('change_status');
+    
+        if ($change_status) {
+            $category_change = Level::find($change_status);
+            if ($category_change->status == 1) {
+                $category_change->update(['status' => 0]);
+                return 'Status change successful';
+            } else {
+                $category_change->update(['status' => 1]);
+                return 'Status change successful';
+            }
+        }
         $subject = Subject::with('exam')->find($id);
         $levels = Level::where(['exam_id' => $subject->exam_id , 'subject_id' => $subject->id])->latest()->get();
         return view('admin.exams.subjects', compact('subject','levels'));

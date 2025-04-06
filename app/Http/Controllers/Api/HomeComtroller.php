@@ -28,6 +28,30 @@ class HomeComtroller extends Controller
     function subjectDetail($id){
         $subject = Subject::with('exam')->find($id);
         $levels = Level::where('subject_id',$id)->get();
+
+        foreach($levels as $level){
+            $check_payment = Order::where('user_id',Auth::id())
+                ->where('level_id',$level->id)
+                ->where('status','completed')
+                ->where('payment_status','paid')
+                ->latest()
+                ->first();
+            if($check_payment){
+                $level['is_paid'] = true;
+            }else{
+                $level['is_paid'] = false;
+            }
+
+            $check_played = SubmitResult::where('user_id',Auth::id())
+                ->where('level_id',$level->id)
+                ->first();
+            if($check_played){
+                $level['is_played'] = true;
+            }else{
+                $level['is_played'] = false;
+            }
+        }
+
         return response()->json([
             'subject' => $subject,
             'levels' => $levels,

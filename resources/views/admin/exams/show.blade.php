@@ -19,7 +19,8 @@
                                     </li>
                                     <li class="breadcrumb-item"><a href="{{ route('admin.exams.index') }}">Exams</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.exams.index') }}">{{ $exam->name ?? '' }}</a>
+                                    <li class="breadcrumb-item"><a
+                                            href="{{ route('admin.exams.index') }}">{{ $exam->name ?? '' }}</a>
                                     </li>
                                     <li class="breadcrumb-item active">Subjects
                                     </li>
@@ -31,8 +32,8 @@
 
 
                 <div class="col-md-3" style="text-align: end">
-                    <button class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#createQuestion">Create Subject</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createQuestion">Create
+                        Subject</button>
 
                     <div class="modal fade modal-danger text-start" id="createQuestion" tabindex="-1"
                         aria-labelledby="myModalLabel120" aria-hidden="true">
@@ -58,31 +59,33 @@
                                                     <input type="text" id="first-name-column" name="name"
                                                         class="form-control" placeholder="Name"
                                                         value="{{ $subject->name ?? '' }}" />
-                                                    <span class="text-danger validation-class" id="name-submit_errors"></span>
+                                                    <span class="text-danger validation-class"
+                                                        id="name-submit_errors"></span>
                                                 </div>
                                             </div>
-    
+
                                             <div class="col-md-2 col-12">
                                                 <div class="mb-1">
                                                     <div class="d-flex flex-column">
-                                                        <label class="form-check-label mb-50" for="customSwitch3">Status</label>
+                                                        <label class="form-check-label mb-50"
+                                                            for="customSwitch3">Status</label>
                                                         <div class="form-check form-check-primary form-switch">
-                                                            <input type="checkbox" name="status" 
-                                                                @if (!empty($subject))
-                                                                    {{ (isset($subject->status) && $subject->status == 1) ? 'checked' : '' }}
+                                                            <input type="checkbox" name="status"
+                                                                @if (!empty($subject)) {{ isset($subject->status) && $subject->status == 1 ? 'checked' : '' }}
                                                                 @else
-                                                                    checked
-                                                                @endif
-                                                            class="form-check-input" id="customSwitch3" value="1"  />
+                                                                    checked @endif
+                                                                class="form-check-input" id="customSwitch3"
+                                                                value="1" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="exam_id" value="{{ $exam->id ?? '' }}" id="">
+                                                <input type="hidden" name="exam_id" value="{{ $exam->id ?? '' }}"
+                                                    id="">
                                             </div>
-    
-                                            
-    
-                                            
+
+
+
+
                                         </div>
                                     </div>
 
@@ -118,12 +121,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-company-table">
-                                <div class="card-header">
+                                {{-- <div class="card-header">
                                     <h4 class="card-title"></h4>
                                     <div class="col-md-3" style="text-align: end">
                                         <input type="text" id="searchInput" class="form-control" placeholder="Search">
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="table-responsive" id="table-responsive">
                                     <table class="table mb-0">
                                         <thead class="table-dark">
@@ -183,7 +186,7 @@
                                                             </button>
                                                             <div class="dropdown-menu dropdown-menu-end">
 
-                                                                <a class="dropdown-item"
+                                                                <a class="dropdown-item" target="_blank"
                                                                     href="{{ route('admin.subjects.edit', $item->id) }}">
                                                                     <i data-feather="edit-2" class="me-50"></i>
                                                                     <span>Edit</span>
@@ -195,10 +198,12 @@
                                                             </a> --}}
 
 
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#danger_ke{{ $item->id }}">
-                                                                <i data-feather="trash" class="me-50"></i>
-                                                                <span>Delete</span>
-                                                            </a>
+                                                                <a class="dropdown-item" href="#"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#danger_ke{{ $item->id }}">
+                                                                    <i data-feather="trash" class="me-50"></i>
+                                                                    <span>Delete</span>
+                                                                </a>
 
                                                             </div>
                                                         </div>
@@ -210,7 +215,8 @@
 
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="myModalLabel120">Delete
+                                                                        <h5 class="modal-title" id="myModalLabel120">
+                                                                            Delete
                                                                         </h5>
                                                                         <button type="button" class="btn-close"
                                                                             data-bs-dismiss="modal"
@@ -269,10 +275,34 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
+        function changeStatus(id) {
+            $.ajax({
+                url: "",
+                method: 'GET',
+                data: {
+                    change_status: id
+                },
+                // dataType: 'html',
+                success: function(data) {
+                    console.log(data);
+                    Toastify({
+                        text: `${data}`,
+                        className: "success",
+                        style: {
+                            background: "linear-gradient(to right, #00b09b, #96c93d)",
+                        }
+                    }).showToast();
+                }
+            });
+        }
+
+
         $(document).ready(function() {
             $('#date_from ,#date_to').on('input', function() {
                 fetch_data();
             });
+
+
 
             function fetch_data() {
                 var date_from = $('#date_from').val();

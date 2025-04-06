@@ -36,126 +36,9 @@
 
                 <div class="col-md-3" style="text-align: end">
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createQuestion">Create
-                        Subject</button>
-
-                    <div class="modal fade modal-danger text-start" id="createQuestion" tabindex="-1"
-                        aria-labelledby="myModalLabel120" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="myModalLabel120">Create
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <form action="{{ route('admin.levels.store') }}" method="POST" id="form_submit">
-                                    @csrf
-
-                                    <div class="modal-body">
-                                        <div class="row">
-
-                                            <div class="col-md-8 col-12">
-                                                <div class="mb-1">
-                                                    <label class="form-label" for="first-name-column">Name <span
-                                                            class="error"></span></label>
-                                                    <input type="text" id="first-name-column" name="name"
-                                                        class="form-control" placeholder="Name"
-                                                        value="{{ $level->name ?? '' }}" />
-                                                    <span class="text-danger validation-class"
-                                                        id="name-submit_errors"></span>
-                                                </div>
-                                            </div>
-
-                                            {{-- <div class="col-md-2 col-12">
-                                                <div class="mb-1">
-                                                    <div class="d-flex flex-column">
-                                                        <label class="form-check-label mb-50" for="customSwitch3">Trending</label>
-                                                        <div class="form-check form-check-primary form-switch">
-                                                            <input type="checkbox" name="trending" 
-                                                                @if (!empty($level))
-                                                                    {{ (isset($level->trending) && $level->trending == 1) ? 'checked' : '' }}
-                                                                @else
-                                                                    checked
-                                                                @endif
-                                                            class="form-check-input" id="customSwitch3" value="1"  />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-
-                                            <div class="col-md-2 col-12">
-                                                <div class="mb-1">
-                                                    <div class="d-flex flex-column">
-                                                        <label class="form-check-label mb-50"
-                                                            for="customSwitch3">Status</label>
-                                                        <div class="form-check form-check-primary form-switch">
-                                                            <input type="checkbox" name="status"
-                                                                @if (!empty($level)) {{ isset($level->status) && $level->status == 1 ? 'checked' : '' }}
-                                                                @else
-                                                                    checked @endif
-                                                                class="form-check-input" id="customSwitch3"
-                                                                value="1" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <input type="hidden" name="subject_id" value="{{ $subject->id ?? '' }}"
-                                                id="">
-                                            <input type="hidden" name="exam_id" value="{{ $subject->exam_id ?? '' }}"
-                                                id="">
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="mb-1">
-                                                    <label class="form-label" for="question-column">Total Question <span
-                                                            class="error"></span></label>
-                                                    <input type="number" id="question-column" name="quaction"
-                                                        class="form-control" placeholder="Quaction"
-                                                        value="{{ $level->quaction ?? '' }}" />
-                                                    <span class="text-danger validation-class"
-                                                        id="quaction-submit_errors"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="mb-1">
-                                                    <label class="form-label" for="question-column">Total Time (In Minutes)
-                                                        <span class="error"></span></label>
-                                                    <input type="number" id="question-column" name="time"
-                                                        class="form-control" placeholder="Total Time "
-                                                        value="{{ $level->time ?? '' }}" />
-                                                    <span class="text-danger validation-class"
-                                                        id="time-submit_errors"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 col-12">
-                                                <div class="mb-1">
-                                                    <label class="form-label" for="question-column">Entry Amount<span
-                                                            class="error"></span></label>
-                                                    <input type="number" id="question-column" name="amount"
-                                                        class="form-control" placeholder="Entry amount "
-                                                        value="{{ $level->amount ?? '' }}" />
-                                                    <span class="text-danger validation-class"
-                                                        id="amount-submit_errors"></span>
-                                                </div>
-                                            </div>
+                        Level</button>
 
 
-
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-danger">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -169,8 +52,7 @@
                             <div class="alert-body">
                                 {{ $error }}
                             </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endforeach
                 @endif
@@ -181,13 +63,6 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-company-table">
-                                <div class="card-header">
-                                    <h4 class="card-title"></h4>
-                                    <div class="col-md-3" style="text-align: end">
-                                        <input type="text" id="searchInput" class="form-control"
-                                            placeholder="Search">
-                                    </div>
-                                </div>
                                 <div class="table-responsive" id="table-responsive">
                                     <table class="table mb-0">
                                         <thead class="table-dark">
@@ -199,7 +74,6 @@
                                                 <th>Amount</th>
                                                 <th>Quaction</th>
                                                 <th>Time</th>
-                                                <th scope="col">status</th>
                                                 <th>Created at</th>
                                                 <th>Action</th>
 
@@ -235,14 +109,7 @@
                                                     <td>{{ $item->quaction ?? '' }}</td>
                                                     <td>{{ $item->time ?? '' }}</td>
 
-                                                    <td>
-                                                        <div class="form-check form-check-primary form-switch">
-                                                            <input type="checkbox" name="status"
-                                                                onchange="changeStatus({{ $item->id }})"
-                                                                {{ $item->status == 1 ? 'checked' : '' }}
-                                                                class="form-check-input" id="customSwitch3" />
-                                                        </div>
-                                                    </td>
+                                                   
 
 
 
@@ -266,7 +133,7 @@
                                                             </button>
                                                             <div class="dropdown-menu dropdown-menu-end">
 
-                                                                <a class="dropdown-item"
+                                                                <a class="dropdown-item" target="_blank"
                                                                     href="{{ route('admin.levels.edit', $item->id) }}">
                                                                     <i data-feather="edit-2" class="me-50"></i>
                                                                     <span>Edit</span>
@@ -349,10 +216,110 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade modal-danger text-start" id="createQuestion" tabindex="-1" aria-labelledby="myModalLabel120"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel120">Create
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('admin.levels.store') }}" method="POST" id="form_submit">
+                    @csrf
+
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-8 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="first-name-column">Name <span
+                                            class="error"></span></label>
+                                    <input type="text" readonly id="first-name-column" name="name" class="form-control"
+                                        placeholder="Name" value="{{ $i }}" />
+                                    <span class="text-danger validation-class" id="name-submit_errors"></span>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="subject_id" value="{{ $subject->id ?? '' }}" id="">
+                            <input type="hidden" name="exam_id" value="{{ $subject->exam_id ?? '' }}" id="">
+
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="question-column">Total Question <span
+                                            class="error"></span></label>
+                                    <input type="number" id="question-column" name="quaction" class="form-control"
+                                        placeholder="Quaction" value="{{ $level->quaction ?? '' }}" />
+                                    <span class="text-danger validation-class" id="quaction-submit_errors"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="question-column">Total Time (In Minutes)
+                                        <span class="error"></span></label>
+                                    <input type="number" id="question-column" name="time" class="form-control"
+                                        placeholder="Total Time " value="{{ $level->time ?? '' }}" />
+                                    <span class="text-danger validation-class" id="time-submit_errors"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="mb-1">
+                                    <label class="form-label" for="question-column">Entry Amount<span
+                                            class="error"></span></label>
+                                    <input type="number" id="question-column" name="amount" class="form-control"
+                                        placeholder="Entry amount " value="{{ $level->amount ?? '' }}" />
+                                    <span class="text-danger validation-class" id="amount-submit_errors"></span>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- END: Content-->
     <!-- END: Content-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script>
+        function changeStatus(id) {
+            $.ajax({
+                url: "",
+                method: 'GET',
+                data: {
+                    change_status: id
+                },
+                // dataType: 'html',
+                success: function(data) {
+                    console.log(data);
+                    Toastify({
+                        text: `${data}`,
+                        className: "success",
+                        style: {
+                            background: "linear-gradient(to right, #00b09b, #96c93d)",
+                        }
+                    }).showToast();
+                }
+            });
+        }
+    </script>
 
     <script>
         $(document).ready(function() {

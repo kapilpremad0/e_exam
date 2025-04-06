@@ -34,7 +34,7 @@ class PaymentController extends Controller
         $razorpayOrder = $api->order->create($orderData);
 
         // Store order in database
-        $order = Order::updateOrCreate(['user_id' => $request->user()->id, 'level_id' => $request->level_id], [
+        $order = Order::create([
             'order_id'      => $razorpayOrder['id'],
             'receipt'       => $order_id,
             'amount'        => $amount,

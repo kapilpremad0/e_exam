@@ -13,7 +13,7 @@ class SubmitResultController extends Controller
 
         $levels = SubmitResult::when($query_search, function ($query) use ($query_search) {
             $query->where('name', 'like', '%' . $query_search . '%');
-        })->with('level')->latest()->paginate(10);
+        })->with('level','user')->latest()->paginate(10);
 
         // return $levels;
 

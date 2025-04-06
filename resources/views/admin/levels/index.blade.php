@@ -12,12 +12,12 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-start mb-0">Level</h2>
+                            <h2 class="content-header-title float-start mb-0">Submit Result</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.levels.index') }}">Levels</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.submit_results.index') }}">Submit Results</a>
                                     </li>
                                     <li class="breadcrumb-item active">List
                                     </li>
@@ -28,9 +28,7 @@
                 </div>
 
 
-                <div class="col-md-3" style="text-align: end">
-                    <a href="{{ route('admin.levels.create') }}" class=" btn btn-primary btn-gradient round  ">Create</a>
-                </div>
+              
 
             </div>
             <div class="content-body">
@@ -64,15 +62,13 @@
                                         <thead class="table-dark">
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Name</th>
+                                                <th scope="col">User Name</th>
+                                                <th>Level</th>
                                                 <th>Exam</th>
                                                 <th>Subject</th>
-                                                <th>Amount</th>
-                                                <th>Quaction</th>
-                                                <th>Time</th>
-                                                <th scope="col">status</th>
+                                                <th>correct_answer</th>
+                                                <th>total_question</th>
                                                 <th>Created at</th>
-                                                <th>Action</th>
 
                                             </tr>
                                         </thead>
@@ -83,110 +79,25 @@
                                                     <td>{{ $i }}</td>
                                                     <td>
                                                         <div class="d-flex align-items-center">
-                                                            {{-- <div class="avatar rounded">
-                                                                <div class="avatar-content"
-                                                                    style="width: 50px;
-                                                            height: 50px;">
-                                                                    <img src="{{ $item->image }}" alt="Toolbar svg"
-                                                                        width="100%" />
-                                                                </div>
-                                                            </div> --}}
+                                                           
                                                             <div>
-                                                                <div class="fw-bolder"><a
-                                                                        href="{{ route('admin.levels.show', $item->id) }}">{{ $item->name ?? '' }}</a>
-                                                                </div>
+                                                                <div class="fw-bolder">{{ $item->user->name ?? '' }}</div>
+                                                                <div class="fw-small">{{ $item->user->email ?? '' }}</div>
+                                                                <div class="fw-small">{{ $item->user->mobile ?? '' }}</div>
                                                             </div>
                                                         </div>
                                                     </td>
 
-                                                    <td>{{ $item->exam->name ?? '' }}</td>
-                                                    <td>{{ $item->subject->name ?? '' }}</td>
+                                                    <td>{{ $item->level->name ?? '' }}</td>
+                                                    <td>{{ $item->level->exam->name ?? '' }}</td>
 
-                                                    <td>{{ $item->amount ?? '' }}</td>
-                                                    <td>{{ $item->quaction ?? '' }}</td>
-                                                    <td>{{ $item->time ?? '' }}</td>
-                                                    
-                                                    <td>
-                                                        <div class="form-check form-check-primary form-switch">
-                                                            <input type="checkbox" name="status"
-                                                                onchange="changeStatus({{ $item->id }})"
-                                                                {{ $item->status == 1 ? 'checked' : '' }}
-                                                                class="form-check-input" id="customSwitch3" />
-                                                        </div>
-                                                    </td>
-
-                                                    
-
-                                                    {{-- <td>
-                                                        <div class="form-check form-check-primary form-switch">
-                                                            <input type="checkbox" name="trending"
-                                                                onchange="changeTrending({{ $item->id }})"
-                                                                {{ $item->trending == 1 ? 'checked' : '' }}
-                                                                class="form-check-input" id="customSwitch3" />
-                                                        </div>
-                                                    </td> --}}
+                                                    <td>{{ $item->level->subject->name ?? '' }}</td>
+                                                    <td>{{ $item->correct_answer ?? '' }}</td>
+                                                    <td>{{ $item->total_question ?? '' }}</td>
 
                                                     <td>{{ date('d-m-Y h:i a', strtotime($item->created_at)) }}</td>
 
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button type="button"
-                                                                class="btn btn-sm dropdown-toggle hide-arrow py-0"
-                                                                data-bs-toggle="dropdown">
-                                                                <i data-feather="more-vertical"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu dropdown-menu-end">
-
-                                                                <a class="dropdown-item"
-                                                                    href="{{ route('admin.levels.edit', $item->id) }}">
-                                                                    <i data-feather="edit-2" class="me-50"></i>
-                                                                    <span>Edit</span>
-                                                                </a>
-
-                                                                {{-- <a class="dropdown-item" href="{{route('admin.levels.show',$item->id)}}">
-                                                                <i data-feather="eye" class="me-50"></i>
-                                                                <span>View</span>
-                                                            </a> --}}
-
-
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#danger_ke{{ $item->id }}">
-                                                                <i data-feather="trash" class="me-50"></i>
-                                                                <span>Delete</span>
-                                                            </a>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal fade modal-danger text-start"
-                                                            id="danger_ke{{ $item->id }}" tabindex="-1"
-                                                            aria-labelledby="myModalLabel120" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered">
-
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="myModalLabel120">Delete
-                                                                        </h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        Are you sure you want to delete !
-                                                                    </div>
-                                                                    <form
-                                                                        action="{{ route('admin.levels.destroy', $item->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        @method('delete')
-                                                                        <div class="modal-footer">
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Delete</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                    
 
                                                 </tr>
                                                 @php

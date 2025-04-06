@@ -25,7 +25,7 @@ class SubmitResultRequest extends FormRequest
             'level_id' => 'required|exists:levels,id',
             'questions' => 'required|array', // Ensures questions is an array and required
             'questions.*.question_id' => 'required|exists:questions,id', // Each question must have a valid ID
-            'questions.*.answer' => 'required|string', // Each question must have an answer
+            'questions.*.answer' => 'nullable|string', // Each question must have an answer
         ];
     }
 }

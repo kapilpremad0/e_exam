@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\SubmitResultRequest;
 use App\Models\Exam;
 use App\Models\Level;
+use App\Models\Order;
 use App\Models\Question;
 use App\Models\Subject;
 use App\Models\SubmitResult;
@@ -46,6 +47,19 @@ class HomeComtroller extends Controller
 
     function submitResult(SubmitResultRequest $request){
         $level = Level::find($request->level_id);
+        $check_payment = Order::where('user_id',Auth::id())
+            ->where('level_id',$request->level_id)
+            ->where('status','completed')
+            ->where('payment_status','paid')
+            ->first();
+            
+        if(!$check_payment){
+            return response()->json([
+                'message' => 'Please pay for the exam before submitting the result.',
+            ], 403);
+        }
+
+        
         $questions = $request->questions;
         $correct_question = 0;
         foreach($questions as $question){

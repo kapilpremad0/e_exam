@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SubmitResultController;
+use App\Http\Controllers\Admin\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,6 +38,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('levels',LavelController::class);
         Route::resource('questions',QuestionController::class);
         Route::resource('submit_results',SubmitResultController::class);
+        Route::resource('transactions',TransactionController::class);
 
         
         

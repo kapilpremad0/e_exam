@@ -6,20 +6,22 @@
             <th>Level</th>
             <th>Exam</th>
             <th>Subject</th>
-            <th>correct_answer</th>
-            <th>total_question</th>
+            <th>Order ID</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Payment Status</th>
             <th>Created at</th>
 
         </tr>
     </thead>
     <tbody>
-        @php  $i = ($levels->currentPage() - 1) * $levels->perPage() + 1; @endphp
-        @foreach ($levels as $item)
+        @php  $i = ($transactions->currentPage() - 1) * $transactions->perPage() + 1; @endphp
+        @foreach ($transactions as $item)
             <tr>
                 <td>{{ $i }}</td>
                 <td>
                     <div class="d-flex align-items-center">
-
+                       
                         <div>
                             <div class="fw-bolder">{{ $item->user->name ?? '' }}</div>
                             <div class="fw-small">{{ $item->user->email ?? '' }}</div>
@@ -32,12 +34,15 @@
                 <td>{{ $item->level->exam->name ?? '' }}</td>
 
                 <td>{{ $item->level->subject->name ?? '' }}</td>
-                <td>{{ $item->correct_answer ?? '' }}</td>
-                <td>{{ $item->total_question ?? '' }}</td>
+
+                <td>{{ $item->order_id ?? '' }}</td>
+                <td>{{ $item->amount ?? '' }}</td>
+                <td>{{ $item->status ?? '' }}</td>
+                <td>{{ $item->payment_status ?? '' }}</td>
 
                 <td>{{ date('d-m-Y h:i a', strtotime($item->created_at)) }}</td>
 
-
+                
 
             </tr>
             @php
@@ -47,7 +52,8 @@
 
     </tbody>
 </table>
-@include('admin._pagination', ['data' => $levels])
+@include('admin._pagination', ['data' => $transactions])
+
 
 <script>
     feather.replace();

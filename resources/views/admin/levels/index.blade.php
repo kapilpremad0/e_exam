@@ -17,7 +17,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.submit_results.index') }}">Submit Results</a>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.levels.index') }}">Submit Results</a>
                                     </li>
                                     <li class="breadcrumb-item active">List
                                     </li>

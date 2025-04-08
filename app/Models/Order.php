@@ -13,7 +13,8 @@ class Order extends Model
         'level_id',
         'status',
         'payment_status',
-        'amount'
+        'amount',
+        'is_played'
     ];
 
     protected $casts = [

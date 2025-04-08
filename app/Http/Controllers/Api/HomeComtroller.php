@@ -34,8 +34,10 @@ class HomeComtroller extends Controller
                 ->where('level_id',$level->id)
                 ->where('status','completed')
                 ->where('payment_status','paid')
+                ->where('is_played',0)
                 ->latest()
                 ->first();
+                
             if($check_payment){
                 $level['is_paid'] = true;
             }else{
@@ -50,6 +52,10 @@ class HomeComtroller extends Controller
             }else{
                 $level['is_played'] = false;
             }
+
+            $level['play_count'] =  SubmitResult::where('user_id',Auth::id())
+            ->where('level_id',$level->id)
+            ->count();
         }
 
         return response()->json([
@@ -71,10 +77,12 @@ class HomeComtroller extends Controller
 
     function submitResult(SubmitResultRequest $request){
         $level = Level::find($request->level_id);
+
         $check_payment = Order::where('user_id',Auth::id())
             ->where('level_id',$request->level_id)
             ->where('status','completed')
             ->where('payment_status','paid')
+            ->where('is_played',0)
             ->first();
             
         if(!$check_payment){
@@ -92,11 +100,14 @@ class HomeComtroller extends Controller
                 $correct_question ++;
             }
         }
-        $submit_result = SubmitResult::updateOrCreate(['user_id' => Auth::id() , 'level_id' => $request->level_id],[
+        $submit_result = SubmitResult::create([
+            'user_id' => Auth::id(),
+            'level_id' => $request->level_id,
             'total_question' => $level->quaction,
             'correct_answer' => $correct_question,
         ]);
 
+        Order::where('id',$check_payment->id)->update(['is_played' => 1]);
         $submit_result['message'] = 'Submit Result Successfully';
         return response()->json($submit_result);
     }

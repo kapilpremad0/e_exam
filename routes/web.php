@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SubmitResultController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,6 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('term-and-condition',function(){
+    $data = Setting::where('key','term_and_condition')->first();
+    $name = "Term And Condition";
+    return view('page',compact('data','name'));
+})->name('term_and_condition');
+
+Route::get('privacy-policy',function(){
+    $data = Setting::where('key','privacy_policy')->first();
+    $name = "Privacy Policy";
+    return view('page',compact('data','name'));
+})->name('privacy_policy');
+
 
 Route::get('/get-subjects', [SubjectController::class, 'getSubjects'])->name('get.subjects');
 

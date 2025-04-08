@@ -119,8 +119,8 @@ class AuthController extends Controller
 
     function settings(){
         $data = [
-            "term_and_condition" => Setting::where('key','term_and_condition')->first()->value ?? '',
-            "privacy_policy" => Setting::where('key','privacy_policy')->first()->value ?? '',
+            "term_and_condition" => route('term_and_condition'),
+            "privacy_policy" => route('privacy_policy'),
         ];
         return response()->json($data);
     }

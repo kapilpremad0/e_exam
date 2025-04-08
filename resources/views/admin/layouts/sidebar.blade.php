@@ -83,6 +83,32 @@
                         class="badge badge-light-warning rounded-pill ms-auto me-1"></span></a>
 
             </li>
+
+            <li
+                class="nav-item">
+                 
+                <a class="d-flex align-items-center" href="#"> <i data-feather="user"></i><span
+                        class="menu-title text-truncate" data-i18n="Invoice">Setting</span>
+                </a>
+
+                <ul class="menu-content">
+
+                    <li
+                        class="nav-item {{ Request::routeIs('admin.settings.term_and_condition') ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('admin.settings.term_and_condition') }}"><i
+                                data-feather="circle"></i><span class="menu-title text-truncate"
+                                data-i18n="File Manager">Terms & Condition</span></a>
+                    </li>
+
+                    <li
+                        class="nav-item {{ Request::routeIs('admin.settings.privacy_policy') ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('admin.settings.privacy_policy') }}"><i
+                                data-feather="circle"></i><span class="menu-title text-truncate"
+                                data-i18n="File Manager">Pravicy Policy</span></a>
+                    </li>
+
+                </ul>
+            </li>
             
 
 

@@ -10,6 +10,7 @@ use App\Http\Requests\Api\ResetPasswordRequest;
 use App\Http\Requests\Api\VerifyOtpRequest;
 use App\Models\City;
 use App\Models\OtpVerify;
+use App\Models\Setting;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -113,5 +114,14 @@ class AuthController extends Controller
     {
         $states = State::orderBy('name','ASC')->get();
         return response()->json($states);
+    }
+
+
+    function settings(){
+        $data = [
+            "term_and_condition" => Setting::where('key','term_and_condition')->first()->value ?? '',
+            "privacy_policy" => Setting::where('key','privacy_policy')->first()->value ?? '',
+        ];
+        return response()->json($data);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\LavelController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SubmitResultController;
 use App\Http\Controllers\Admin\TransactionController;
@@ -41,6 +42,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('submit_results',SubmitResultController::class);
         Route::resource('transactions',TransactionController::class);
         Route::resource('users',UserController::class);
+        Route::resource('settings',SettingController::class);
+
+        Route::get('settings-term_and_condition',[SettingController::class,'term_and_condition'])->name('settings.term_and_condition');
+        Route::get('settings-privacy_policy',[SettingController::class,'privacy_policy'])->name('settings.privacy_policy');
 
         
         

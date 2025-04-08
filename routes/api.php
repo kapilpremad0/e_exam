@@ -34,5 +34,7 @@ Route::get('results',[HomeComtroller::class,'results'])->middleware('auth:api');
 
 Route::get('cities',[AuthController::class,'getCities']);
 Route::get('states',[AuthController::class,'getStates']);
+Route::get('settings',[AuthController::class,'settings']);
 
 Route::apiResource('profile',ProfileController::class)->middleware('auth:api');
+Route::post('delete_account',[ProfileController::class,'deleteAccount'])->middleware('auth:api');

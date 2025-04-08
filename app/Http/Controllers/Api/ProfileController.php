@@ -31,4 +31,10 @@ class ProfileController extends Controller
         // $profile = new ProfileResource($profile);
         return response()->json($profile);   
     }
+
+
+    function deleteAccount(){
+        User::where('id',Auth::id())->delete();
+        return response()->json(['message' => 'Account Delete Successfully']);
+    }
 }

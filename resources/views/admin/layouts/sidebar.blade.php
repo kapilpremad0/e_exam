@@ -107,6 +107,13 @@
                                 data-i18n="File Manager">Pravicy Policy</span></a>
                     </li>
 
+                    <li
+                        class="nav-item {{ Request::routeIs('admin.settings.general_setting') ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('admin.settings.general_setting') }}"><i
+                                data-feather="circle"></i><span class="menu-title text-truncate"
+                                data-i18n="File Manager">General Settings</span></a>
+                    </li>
+
                 </ul>
             </li>
             

@@ -90,9 +90,8 @@ class AuthController extends Controller
 
 
     function reset_password(ResetPasswordRequest $request){
-        $data['password'] = Hash::make($request->pssword);
         $user = User::where('id',Auth::user()->id)->update([
-            'password' => Hash::make($request->pssword)
+            'password' => Hash::make($request->password)
         ]);
         $user = User::find(Auth::id());
         $user['message'] = 'Password Change Successfully';
@@ -118,9 +117,11 @@ class AuthController extends Controller
 
 
     function settings(){
+        $general_settings = Setting::whereIn('key',Setting::$general_settings)->get(['key','value']);
         $data = [
             "term_and_condition" => route('term_and_condition'),
             "privacy_policy" => route('privacy_policy'),
+            "general_settings" => $general_settings
         ];
         return response()->json($data);
     }

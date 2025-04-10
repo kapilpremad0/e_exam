@@ -60,6 +60,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::get('settings-term_and_condition',[SettingController::class,'term_and_condition'])->name('settings.term_and_condition');
         Route::get('settings-privacy_policy',[SettingController::class,'privacy_policy'])->name('settings.privacy_policy');
+        Route::get('settings-general_setting',[SettingController::class,'general_setting'])->name('settings.general_setting');
 
         
         
